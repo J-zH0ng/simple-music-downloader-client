@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MusicService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IMusicService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <msf:Streamed xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/server" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMusicService_GetSongViews_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSongViews" />
+  </wsdl:message>
+  <wsdl:message name="IMusicService_GetSongViews_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSongViewsResponse" />
+  </wsdl:message>
+  <wsdl:message name="DownFile">
+    <wsdl:part name="parameters" element="tns:DownFile" />
+  </wsdl:message>
+  <wsdl:message name="DownFile_Headers">
+    <wsdl:part name="Id" element="tns:Id" />
+  </wsdl:message>
+  <wsdl:message name="DownFileResult">
+    <wsdl:part name="parameters" element="tns:DownFileResult" />
+  </wsdl:message>
+  <wsdl:message name="DownFileResult_Headers">
+    <wsdl:part name="FileSize" element="tns:FileSize" />
+    <wsdl:part name="IsSuccess" element="tns:IsSuccess" />
+  </wsdl:message>
+  <wsdl:portType name="IMusicService">
+    <wsdl:operation name="GetSongViews">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/GetSongViews" message="tns:IMusicService_GetSongViews_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/GetSongViewsResponse" message="tns:IMusicService_GetSongViews_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DownLoadFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMusicService/DownLoadFile" name="DownFile" message="tns:DownFile" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMusicService/DownLoadFileResponse" name="DownFileResult" message="tns:DownFileResult" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IMusicService" type="tns:IMusicService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IMusicService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetSongViews">
+      <soap12:operation soapAction="http://tempuri.org/IMusicService/GetSongViews" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DownLoadFile">
+      <soap12:operation soapAction="http://tempuri.org/IMusicService/DownLoadFile" style="document" />
+      <wsdl:input name="DownFile">
+        <soap12:header message="tns:DownFile_Headers" part="Id" use="literal" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DownFileResult">
+        <soap12:header message="tns:DownFileResult_Headers" part="FileSize" use="literal" />
+        <soap12:header message="tns:DownFileResult_Headers" part="IsSuccess" use="literal" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MusicService">
+    <wsdl:port name="NetTcpBinding_IMusicService" binding="tns:NetTcpBinding_IMusicService">
+      <soap12:address location="net.tcp://localhost:8734/Design_Time_Addresses/server/Service1/" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8734/Design_Time_Addresses/server/Service1/</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>localhost</Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
