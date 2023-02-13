@@ -24,6 +24,7 @@
   5. 数据层：MySQL数据库、Entity Framework ORM框架。
 - database tool： 把目录里的音乐文件批量录入数据库的脚本
 # 展示
+[bilibili](https://www.bilibili.com/video/BV1se4y1w7cz)
 <div align=center>
   <img src="https://user-images.githubusercontent.com/69312774/218294687-2b7d9282-660f-4e15-884a-2e68c34848e4.png" alt="音乐市场、下载" title="音乐市场、下载" height=350 width=600>
   <img src="https://user-images.githubusercontent.com/69312774/218294758-8a1bd35e-5ed9-45c3-8ee6-1f91b286f1a0.png" alt="下载管理" title="下载管理" height=350 width=600>
