@@ -20,8 +20,8 @@
   4. 模型层：按照不同的实体分为：
       - 用户类：封装了用户的信息。
       - 歌曲类：封装了歌曲信息和相关方法。
-      - 播放列表类：封装了播放列表信息和相关方法。
-      - 数据层：MySQL数据库、Entity Framework ORM框架。
+      - 播放列表类：封装了播放列表信息和相关方法。 
+  5. 数据层：MySQL数据库、Entity Framework ORM框架。
 - database tool： 把目录里的音乐文件批量录入数据库的脚本
 # 展示
 <div align=center>
